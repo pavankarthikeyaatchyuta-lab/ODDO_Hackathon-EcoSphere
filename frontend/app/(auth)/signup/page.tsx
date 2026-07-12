@@ -31,9 +31,10 @@ export default function SignupPage() {
       show("Account created! Welcome to EcoSphere", "success");
       router.push("/dashboard");
     } catch (err: unknown) {
-      const e = err as { response?: { data?: { detail?: string } }; message?: string };
+      const e = err as { response?: { status?: number; data?: { detail?: string } }; message?: string };
+      const status = e?.response?.status ? ` (${e.response.status})` : "";
       const msg = e?.response?.data?.detail || e?.message || "Registration failed";
-      show(msg, "error");
+      show(msg + status, "error");
     } finally {
       setLoading(false);
     }

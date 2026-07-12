@@ -13,17 +13,23 @@ import app.models.social
 import app.models.governance
 import app.models.gamification
 
-Base.metadata.create_all(bind=engine)
-
 app = FastAPI(title="EcoSphere API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.on_event("startup")
+def startup():
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        print(f"DB init warning: {e}")
 
 app.include_router(auth.router)
 app.include_router(dashboard.router)
