@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import Base, engine
 from app.api import auth, dashboard, environmental, social, governance, gamification, reports, ai, settings
 
-# import models so SQLAlchemy registers them before create_all
 import app.models.user
 import app.models.department
 import app.models.settings

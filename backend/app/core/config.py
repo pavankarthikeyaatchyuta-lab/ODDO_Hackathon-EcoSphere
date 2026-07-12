@@ -6,10 +6,10 @@ class Settings(BaseSettings):
     secret_key: str = "supersecretkey123"
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 1440
-    ai_provider: str = "groq"          # "groq" or "ollama"
+    ai_provider: str = "groq"
     groq_api_key: str = ""
     ollama_base_url: str = "http://localhost:11434/v1"
-    ai_model: str = ""                  # leave empty to use provider default
+    ai_model: str = ""
 
     class Config:
         env_file = ".env"

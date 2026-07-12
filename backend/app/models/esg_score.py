@@ -13,7 +13,7 @@ class DepartmentScore(Base):
     social_score = Column(Float, default=0.0)
     governance_score = Column(Float, default=0.0)
     total_score = Column(Float, default=0.0)
-    period = Column(String, nullable=False)  # e.g. "2024-Q1"
+    period = Column(String, nullable=False)
     calculated_at = Column(DateTime(timezone=True), server_default=func.now())
 
     department = relationship("Department", back_populates="department_scores")
