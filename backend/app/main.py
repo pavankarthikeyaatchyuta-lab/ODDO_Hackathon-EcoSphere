@@ -45,3 +45,14 @@ app.include_router(settings.router)
 @app.get("/")
 def root():
     return {"status": "ok", "app": "EcoSphere", "docs": "/docs"}
+
+
+@app.get("/health")
+def health():
+    try:
+        from app.core.database import engine
+        with engine.connect() as conn:
+            conn.execute(__import__("sqlalchemy").text("SELECT 1"))
+        return {"status": "ok", "db": "connected"}
+    except Exception as e:
+        return {"status": "ok", "db": "error", "detail": str(e)}
