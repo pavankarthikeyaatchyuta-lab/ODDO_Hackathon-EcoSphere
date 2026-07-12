@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    database_url: str = "postgresql://ecosphere:ecosphere_pass@localhost:5432/ecosphere_db"
+    database_url: str = "postgresql://neondb_owner:npg_EjnaB2r7HyzL@ep-divine-poetry-at2qm1gc-pooler.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require"
     secret_key: str = "supersecretkey123"
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 1440
