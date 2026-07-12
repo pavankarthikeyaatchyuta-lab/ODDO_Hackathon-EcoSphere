@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { TreePine } from "lucide-react";
 import { useAuthStore } from "@/app/stores/authStore";
 import { useToast } from "@/app/components/ui/Toast";
@@ -68,6 +69,13 @@ export default function LoginPage() {
             {loading ? "Signing in..." : "Sign In"}
           </Button>
         </form>
+
+        <p className="text-center text-xs text-[var(--text-muted)] mt-6">
+          Don&apos;t have an account?{" "}
+          <Link href="/signup" className="text-[var(--accent-moss)] hover:underline">
+            Sign Up
+          </Link>
+        </p>
       </GlassCard>
     </div>
   );

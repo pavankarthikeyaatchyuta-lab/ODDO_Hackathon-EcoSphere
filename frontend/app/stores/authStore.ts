@@ -16,6 +16,7 @@ interface AuthState {
   token: string | null;
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
+  register: (email: string, full_name: string, password: string, role: string) => Promise<void>;
   logout: () => void;
   fetchMe: () => Promise<void>;
 }
@@ -27,6 +28,18 @@ export const useAuthStore = create<AuthState>()(
       user: null,
 
       login: async (email, password) => {
+        const form = new URLSearchParams();
+        form.append("username", email);
+        form.append("password", password);
+        const res = await api.post("/api/auth/login", form, {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        });
+        set({ token: res.data.access_token });
+        await get().fetchMe();
+      },
+
+      register: async (email, full_name, password, role) => {
+        await api.post("/api/auth/register", { email, full_name, password, role });
         const form = new URLSearchParams();
         form.append("username", email);
         form.append("password", password);
